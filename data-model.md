@@ -23,7 +23,8 @@ tasks:
 - description (required)
 - notes
 - completed (booleen, not NULL, default false)
+- project_id (from table projects)
 
 project_resources:
-- project_id
-- resource_id
+- project_id (from table projects)
+- resource_id (from table resources)
