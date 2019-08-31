@@ -42,5 +42,5 @@ function addTask(taskData) {
 }
 
 function listTasks() {
-
+  return db('tasks');
 }
