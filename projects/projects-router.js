@@ -4,8 +4,16 @@ const Projects = require('./projects-model.js');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.status(200).json("Got em!");
+router.post('/resources', (req, res) => {
+  const resourceData = req.body;
+
+  Projects.addResource(resourceData)
+    .then(resource => {
+      res.status(201).json(resource)
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to create new resource' });
+    })
 });
 
 module.exports = router;
