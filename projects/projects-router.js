@@ -53,4 +53,24 @@ router.get('/', (req, res) => {
     })
 });
 
+router.post('/:id/tasks', (req, res) => {
+  const { id } = req.params;
+  const taskData = {...req.body, "project_id": id };
+
+  // if data doesn't specify Completed, default to false
+  if(taskData['completed'] === undefined) {
+    taskData['completed'] = false;
+  }
+  
+  console.log('the taskData looks like this:', taskData);
+  Projects.addTask(taskData)
+    .then(task => {
+      task['completed'] ? task['completed'] = true : task['completed'] = false;
+      res.status(201).json(task)
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to create new task' });
+    })
+});
+
 module.exports = router;

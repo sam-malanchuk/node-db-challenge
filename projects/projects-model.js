@@ -33,8 +33,12 @@ function listProjects() {
   return db('projects');
 }
 
-function addTask() {
-
+function addTask(taskData) {
+  return db('tasks').insert(taskData)
+    .then(ids => {
+      const id = ids[0];
+      return db('tasks').where({id}).first()
+    })
 }
 
 function listTasks() {
