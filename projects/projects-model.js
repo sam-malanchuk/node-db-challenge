@@ -21,8 +21,12 @@ function listResources() {
   return db('resources');
 }
 
-function addProject() {
-
+function addProject(projectData) {
+  return db('projects').insert(projectData)
+    .then(ids => {
+      const id = ids[0];
+      return db('projects').where({id}).first()
+    })
 }
 
 function listProjects() {
