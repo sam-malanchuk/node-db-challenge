@@ -30,7 +30,7 @@ function addProject(projectData) {
 }
 
 function listProjects() {
-
+  return db('projects');
 }
 
 function addTask() {
