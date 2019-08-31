@@ -36,6 +36,7 @@ router.post('/', (req, res) => {
 
   Projects.addProject(projectData)
     .then(project => {
+      project['completed'] ? project['completed'] = true : project['completed'] = false;
       res.status(201).json(project)
     })
     .catch(err => {
@@ -46,6 +47,9 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
   Projects.listProjects()
     .then(projects => {
+      projects.map(project => {
+        project.completed ? project.completed = true : project.completed = false;
+      });
       res.status(200).json(projects);
     })
     .catch(err => {
